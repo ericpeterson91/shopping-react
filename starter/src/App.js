@@ -17,14 +17,47 @@ const App = () => {
     { itemName: "Item 3", quantity: 30, isSelected: false },
   ]);
 
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState("");
+
+  const addButton = () => {
+	const newItem = {
+		itemName: inputValue,
+		quantity: 1,
+		isSelected: false
+	}
+	const newItems = [...items, newItem]
+
+	setItems(newItems)
+	setInputValue('')
+  };
+
+  const increase = (index) => {
+	const newItems = [...items]
+
+	newItems[index].quantity = newItems[index].quantity + 1
+
+	setItems(newItems)
+  }
+
+  const decrease = (index) => {
+	const newItems = [...items]
+
+	newItems[index].quantity = newItems[index].quantity - 1
+
+	setItems(newItems)
+  }
 
   return (
     <div className="app-background">
       <div className="main-container">
         <div className="add-item-box">
-          <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} className="add-item-input" placeholder="Add an item..." />
-          <FontAwesomeIcon icon={faPlus} />
+          <input
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+            className="add-item-input"
+            placeholder="Add an item..."
+          />
+          <FontAwesomeIcon icon={faPlus} onClick={addButton} />
         </div>
         <div className="item-list">
           {items.map((item, index) => (
@@ -44,11 +77,11 @@ const App = () => {
               </div>
               <div className="quantity">
                 <button>
-                  <FontAwesomeIcon icon={faChevronLeft} />
+                  <FontAwesomeIcon icon={faChevronLeft} onClick={() => decrease(index)} />
                 </button>
                 <span> {item.quantity} </span>
                 <button>
-                  <FontAwesomeIcon icon={faChevronRight} />
+                  <FontAwesomeIcon icon={faChevronRight} onClick={() => increase(index)} />
                 </button>
               </div>
             </div>
