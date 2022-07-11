@@ -28,7 +28,7 @@ const App = () => {
           {items.map((item, index) => (
             <div className="item-container">
               <div className="item-name">
-                {false ? (
+                {item.isSelected ? (
                   <>
                     <FontAwesomeIcon icon={faCheckCircle} />
                     <span className="completed">{item.itemName}</span>
