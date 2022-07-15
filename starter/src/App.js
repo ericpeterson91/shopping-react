@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
-  // HINT: each "item" in our list names a name, a boolean to tell if its been completed, and a quantity
   const [items, setItems] = useState([
     { itemName: "Item 1", quantity: 10, isSelected: false },
     { itemName: "Item 2", quantity: 20, isSelected: true },
@@ -47,6 +46,14 @@ const App = () => {
 	setItems(newItems)
   }
 
+  const toggleComplete = (index) => {
+    const newItems = [...items]
+
+    newItems[index].isSelected = !newItems[index].isSelected
+
+    setItems(newItems)
+  }
+
   return (
     <div className="app-background">
       <div className="main-container">
@@ -62,7 +69,7 @@ const App = () => {
         <div className="item-list">
           {items.map((item, index) => (
             <div className="item-container">
-              <div className="item-name">
+              <div className="item-name" onClick={() => toggleComplete(index)}>
                 {item.isSelected ? (
                   <>
                     <FontAwesomeIcon icon={faCheckCircle} />
@@ -87,7 +94,7 @@ const App = () => {
             </div>
           ))}
         </div>
-        <div className="total">Total: 6</div>
+        <div className="total">Total: {}</div>
       </div>
     </div>
   );
